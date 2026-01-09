@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 
 import PackageDescription
 import CompilerPluginSupport
@@ -25,7 +25,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/stackotter/swift-macro-toolkit.git",
-			.upToNextMinor(from: "0.6.0")
+			.upToNextMinor(from: "0.8.0")
 		),
 		.package(
 			url: "https://github.com/pointfreeco/swift-macro-testing.git",
@@ -69,5 +69,6 @@ let package = Package(
 				.product(name: "MacroTesting", package: "swift-macro-testing"),
 			]
 		),
-	]
+	],
+	swiftLanguageModes: [.v6]
 )
