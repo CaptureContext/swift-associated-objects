@@ -1,5 +1,6 @@
 import Foundation
 
+#if canImport(ObjectiveC)
 public protocol AssociatingObject: AnyObject {
 	@inlinable
 	@discardableResult
@@ -16,7 +17,7 @@ public protocol AssociatingObject: AnyObject {
 		forKey key: StaticString,
 		threadSafety: _AssociationPolicyThreadSafety
 	) -> Bool
-	
+
 	@inlinable
 	func getAssociatedObject<Object>(
 		of type: Object.Type,
@@ -127,3 +128,4 @@ public func _getAssociatedObject<Object>(
 }
 
 extension NSObject: AssociatingObject {}
+#endif

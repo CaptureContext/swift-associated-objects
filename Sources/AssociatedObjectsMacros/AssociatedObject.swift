@@ -1,6 +1,7 @@
 import AssociatedObjects
 import Foundation
 
+#if canImport(ObjectiveC)
 @attached(accessor)
 public macro AssociatedObject(
 	policy: objc_AssociationPolicy,
@@ -18,3 +19,4 @@ public macro AssociatedObject(
 	module: "AssociatedObjectsMacrosPlugin",
 	type: "AssociatedObjectMacro"
 )
+#endif

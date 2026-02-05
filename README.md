@@ -4,17 +4,16 @@
 
 Associated objects utils
 
+## Table of contents
+
 - [Documentation](https://swiftpackageindex.com/CaptureContext/swift-associated-objects/0.5.0/documentation/associatedobjects)
-- [Contents](#contents)
-  - [Usage](#usage)
+- [Usage](#usage)
 - [Installation](#installation)
   - [Basic](#basic)
   - [Recommended](#recommended)
 - [Licence](#licence)
 
-## Contents
-
-### Usage
+## Usage
 
 Basic helpers for object association are available in "AssociatedObjects" product
 
@@ -102,6 +101,9 @@ Do not forget about target dependencies:
 )
 ```
 
+> [!NOTE]
+>
+> _The package is compatible with non-Apple platforms, but this package uses conditional compilation, so APIs are only available `#if canImport(ObjectiveC)`_
 
 ## License
 
