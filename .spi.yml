@@ -1,21 +1,29 @@
 version: 1
 builder:
-	configs:
-	- platform: ios
-		scheme: AssociatedObjects
-	- platform: macos-xcodebuild
-		scheme: AssociatedObjects
-	- platform: tvos
-		scheme: AssociatedObjects
-	- platform: watchos
-		scheme: AssociatedObjects
-	- platform: linux
-		scheme: AssociatedObjects
-		swift_version: '5.9'
-	- platform: linux
-		scheme: AssociatedObjects
-		swift_version: '6.0'
+  configs:
+  - platform: ios
+    scheme: AssociatedObjects
 
-	- documentation_targets:
-		- AssociatedObjects
-		- AssociatedObjectsMacros
+  - platform: macos-spm
+    scheme: AssociatedObjects
+
+  - platform: macos-xcodebuild
+    scheme: AssociatedObjects
+
+  - platform: tvos
+    scheme: AssociatedObjects
+
+  - platform: watchos
+    scheme: AssociatedObjects
+
+  - platform: linux
+    scheme: AssociatedObjects
+    swift_version: '5.9'
+
+  - platform: linux
+    scheme: AssociatedObjects
+    swift_version: '6.0'
+
+  - documentation_targets:
+    - AssociatedObjects
+    - AssociatedObjectsMacros
