@@ -1,6 +1,6 @@
+#if canImport(Darwin) && canImport(ObjectiveC)
 import Foundation
 
-#if canImport(ObjectiveC)
 /// Helper for creating `objc_AssociationPolicy`
 public enum _AssociationPolicyKind: String {
 	/// `OBJC_ASSOCIATION_COPY` / `OBJC_ASSOCIATION_COPY_NONATOMIC`

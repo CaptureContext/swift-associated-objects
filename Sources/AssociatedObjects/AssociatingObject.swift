@@ -1,6 +1,6 @@
+#if canImport(Darwin) && canImport(ObjectiveC)
 import Foundation
 
-#if canImport(ObjectiveC)
 public protocol AssociatingObject: AnyObject {
 	@inlinable
 	@discardableResult

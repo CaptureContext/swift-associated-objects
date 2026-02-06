@@ -1,7 +1,8 @@
 import AssociatedObjects
+
+#if canImport(Darwin) && canImport(ObjectiveC)
 import Foundation
 
-#if canImport(ObjectiveC)
 @attached(accessor)
 public macro AssociatedObject(
 	policy: objc_AssociationPolicy,
