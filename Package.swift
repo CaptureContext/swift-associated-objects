@@ -25,7 +25,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/stackotter/swift-macro-toolkit.git",
-			"0.7.0"..<"0.9.0"
+			"0.6.0"..<"0.9.0"
 		),
 		.package(
 			url: "https://github.com/pointfreeco/swift-macro-testing.git",
