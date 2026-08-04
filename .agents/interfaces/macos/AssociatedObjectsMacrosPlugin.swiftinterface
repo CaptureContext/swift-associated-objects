@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.4 (swiftlang-6.4.0.25.4 clang-2100.3.25.1)
-// swift-module-flags: -target arm64-apple-macosx12.0 -enable-objc-interop -language-mode 6 -Onone -module-name AssociatedObjectsMacrosPlugin -package-name swift_associated_objects
-// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4
+// swift-compiler-version: Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+// swift-module-flags: -target arm64-apple-macosx10.15 -enable-objc-interop -swift-version 6 -Onone -module-name AssociatedObjectsMacrosPlugin -package-name swift_associated_objects
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
 import Foundation
 import MacroToolkit
 import Swift
@@ -12,14 +12,14 @@ import SwiftSyntaxMacros
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-public struct AssociatedObjectMacro : SwiftSyntaxMacros::AccessorMacro {
-  public static func expansion(of node: SwiftSyntax::AttributeSyntax, providingAccessorsOf declaration: some DeclSyntaxProtocol, in context: some MacroExpansionContext) throws -> [SwiftSyntax::AccessorDeclSyntax]
+public struct AssociatedObjectMacro : SwiftSyntaxMacros.AccessorMacro {
+  public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingAccessorsOf declaration: some DeclSyntaxProtocol, in context: some MacroExpansionContext) throws -> [SwiftSyntax.AccessorDeclSyntax]
 }
-extension SwiftSyntaxMacros::MacroExpansionContext {
-  public func diagnose<T>(_ diagnostic: SwiftDiagnostics::Diagnostic, return value: T) -> T
+extension SwiftSyntaxMacros.MacroExpansionContext {
+  public func diagnose<T>(_ diagnostic: SwiftDiagnostics.Diagnostic, return value: T) -> T
 }
-public func == <A, B>(lhs: Swift::KeyPath<A, B>, rhs: B) -> (A) -> Swift::Bool where B : Swift::Equatable
-public func != <A, B>(lhs: Swift::KeyPath<A, B>, rhs: B) -> (A) -> Swift::Bool where B : Swift::Equatable
-public func || <A>(lhs: @escaping (A) -> Swift::Bool, rhs: @escaping (A) -> Swift::Bool) -> (A) -> Swift::Bool
-public func && <A>(lhs: @escaping (A) -> Swift::Bool, rhs: @escaping (A) -> Swift::Bool) -> (A) -> Swift::Bool
-prefix public func ! <A>(f: @escaping (A) -> Swift::Bool) -> (A) -> Swift::Bool
+public func == <A, B>(lhs: Swift.KeyPath<A, B>, rhs: B) -> (A) -> Swift.Bool where B : Swift.Equatable
+public func != <A, B>(lhs: Swift.KeyPath<A, B>, rhs: B) -> (A) -> Swift.Bool where B : Swift.Equatable
+public func || <A>(lhs: @escaping (A) -> Swift.Bool, rhs: @escaping (A) -> Swift.Bool) -> (A) -> Swift.Bool
+public func && <A>(lhs: @escaping (A) -> Swift.Bool, rhs: @escaping (A) -> Swift.Bool) -> (A) -> Swift.Bool
+prefix public func ! <A>(f: @escaping (A) -> Swift.Bool) -> (A) -> Swift.Bool
