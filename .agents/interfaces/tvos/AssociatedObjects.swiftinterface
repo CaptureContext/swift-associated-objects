@@ -1,0 +1,136 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+// swift-module-flags: -target arm64-apple-tvos13.0-simulator -enable-objc-interop -swift-version 6 -Onone -module-name AssociatedObjects -package-name swift_associated_objects
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public protocol AssociatingObject : AnyObject {
+  @discardableResult
+  @inlinable func setAssociatedObject<Object>(_ object: Object?, forKey key: Swift.StaticString, policy: ObjectiveC.objc_AssociationPolicy) -> Swift.Bool
+  @discardableResult
+  @inlinable func setAssociatedObject<Object>(_ object: Object?, forKey key: Swift.StaticString, threadSafety: AssociatedObjects._AssociationPolicyThreadSafety) -> Swift.Bool
+  @inlinable func getAssociatedObject<Object>(of type: Object.Type, forKey key: Swift.StaticString) -> Object?
+}
+extension AssociatedObjects.AssociatingObject {
+  @discardableResult
+  @inlinable public func setAssociatedObject<Object>(_ object: Object?, forKey key: Swift.StaticString, policy: ObjectiveC.objc_AssociationPolicy = .retain(.nonatomic)) -> Swift.Bool {
+		return _setAssociatedObject(
+			object,
+			to: self,
+			forKey: key,
+			policy: policy
+		)
+	}
+  @discardableResult
+  @inlinable public func setAssociatedObject<Object>(_ object: Object?, forKey key: Swift.StaticString, threadSafety: AssociatedObjects._AssociationPolicyThreadSafety) -> Swift.Bool {
+		return _setAssociatedObject(
+			object,
+			to: self,
+			forKey: key,
+			threadSafety: threadSafety
+		)
+	}
+  @inlinable public func getAssociatedObject<Object>(of type: Object.Type = Object.self, forKey key: Swift.StaticString) -> Object? {
+		return _getAssociatedObject(
+			forKey: key,
+			from: self
+		)
+	}
+}
+@discardableResult
+@inlinable public func _setAssociatedObject<Object>(_ object: Object?, to associatingObject: Swift.AnyObject, forKey key: Swift.StaticString, threadSafety: AssociatedObjects._AssociationPolicyThreadSafety = .nonatomic) -> Swift.Bool {
+	_setAssociatedObject(
+		object,
+		to: associatingObject,
+		forKey: key,
+		policy: .init(
+			Object.self is AnyClass ? .retain : .copy,
+			threadSafety
+		)
+	)
+}
+@discardableResult
+@inlinable public func _setAssociatedObject<Object>(_ object: Object?, to associatingObject: Swift.AnyObject, forKey key: Swift.StaticString, policy: ObjectiveC.objc_AssociationPolicy) -> Swift.Bool {
+	guard key.hasPointerRepresentation
+	else { return false }
+
+	objc_setAssociatedObject(
+		associatingObject,
+		UnsafeRawPointer(key.utf8Start),
+		object,
+		policy
+	)
+
+	return true
+}
+@inlinable public func _getAssociatedObject<Object>(of type: Object.Type = Object.self, forKey key: Swift.StaticString, from associatingObject: Swift.AnyObject) -> Object? {
+	guard key.hasPointerRepresentation
+	else { return nil }
+
+	return objc_getAssociatedObject(
+		associatingObject,
+		UnsafeRawPointer(key.utf8Start)
+	)
+	.flatMap { $0 as? Object }
+}
+extension ObjectiveC.NSObject : AssociatedObjects.AssociatingObject {
+}
+public enum _AssociationPolicyKind : Swift.String {
+  case copy
+  case assign
+  case retain
+  @inlinable public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    @inlinable get
+  }
+}
+public enum _AssociationPolicyThreadSafety : Swift.String {
+  case atomic
+  case nonatomic
+  @inlinable public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    @inlinable get
+  }
+}
+extension ObjectiveC.objc_AssociationPolicy {
+  @inlinable public init(_ kind: AssociatedObjects._AssociationPolicyKind, _ threadSafety: AssociatedObjects._AssociationPolicyThreadSafety) {
+		switch kind {
+		case .copy:
+			self = .copy(threadSafety)
+		case .assign:
+			self = .assign
+		case .retain:
+			self = .retain(threadSafety)
+		}
+	}
+  @inlinable public static var assign: ObjectiveC.objc_AssociationPolicy {
+    get { .OBJC_ASSOCIATION_ASSIGN }
+  }
+  @inlinable public static func retain(_ threadSafety: AssociatedObjects._AssociationPolicyThreadSafety) -> ObjectiveC.objc_AssociationPolicy {
+		switch threadSafety {
+		case .atomic:
+				.OBJC_ASSOCIATION_RETAIN
+		case .nonatomic:
+				.OBJC_ASSOCIATION_RETAIN_NONATOMIC
+		}
+	}
+  @inlinable public static func copy(_ threadSafety: AssociatedObjects._AssociationPolicyThreadSafety) -> ObjectiveC.objc_AssociationPolicy {
+		switch threadSafety {
+		case .atomic:
+				.OBJC_ASSOCIATION_COPY
+		case .nonatomic:
+				.OBJC_ASSOCIATION_COPY_NONATOMIC
+		}
+	}
+}
+extension AssociatedObjects._AssociationPolicyKind : Swift.Equatable {}
+extension AssociatedObjects._AssociationPolicyKind : Swift.Hashable {}
+extension AssociatedObjects._AssociationPolicyKind : Swift.RawRepresentable {}
+extension AssociatedObjects._AssociationPolicyThreadSafety : Swift.Equatable {}
+extension AssociatedObjects._AssociationPolicyThreadSafety : Swift.Hashable {}
+extension AssociatedObjects._AssociationPolicyThreadSafety : Swift.RawRepresentable {}
