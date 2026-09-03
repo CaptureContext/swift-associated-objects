@@ -25,7 +25,7 @@ let package = Package(
 	dependencies: [
 		.package(
 			url: "https://github.com/maximkrouk/swift-macro-toolkit.git",
-			exact: "0.9.1"
+			branch: "cctx/myo-local"
 		),
 		.package(
 			url: "https://github.com/swiftlang/swift-syntax.git",
